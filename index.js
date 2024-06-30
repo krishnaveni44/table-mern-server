@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const UserModel = require('./models/Users')
+const RegisterModel = require('./models/Register')
+// const LoginModel = require('./models/Login')
 
 const app = express()
 app.use(cors())
@@ -20,6 +22,46 @@ mongoose
 //     .then(users => res.json(users))
 //     .catch(err => res.json(err))
 // })
+
+// app.post('/register', (req, res) => {
+//     const {name, email, password} = req.body;
+//     RegisterModel.findOne({email: email})
+//     .then(user => {
+//         if(user) {
+//             res.json("Already have an account")
+//         } else {
+//             RegisterModel.create({name: name, email: email, password: password})
+//             .then(result => res.json(result))
+//             .catch(err => res.json(err))
+//         }
+//     }).catch(err => res.json(err))
+// })
+
+app.post('/register', (req, res) => {
+        RegisterModel.create(req.body)
+        .then(register => res.json(register))
+        .catch(err => res.json(err))
+    })
+
+
+
+app.post('/login', (req, res) => {
+    const {email, password} = req.body;
+    RegisterModel.findOne({email: email})
+    .then(user => {
+        if(user) {
+            if(user.password === password){
+                res.json("Success")
+            } else{
+                res.json("password incorrect")
+            }
+            
+        } else {
+            res.json("No record existed")
+        }
+    }).catch(err => res.json(err))
+})
+
 
 app.get('/', (req, res) => {
     UserModel.find({})
