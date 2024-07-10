@@ -37,7 +37,7 @@ mongoose
 //     }).catch(err => res.json(err))
 // })
 
-app.post('/register', (req, res) => {
+app.post('/', (req, res) => {
         RegisterModel.create(req.body)
         .then(register => res.json(register))
         .catch(err => res.json(err))
@@ -63,7 +63,7 @@ app.post('/login', (req, res) => {
 })
 
 
-app.get('/', (req, res) => {
+app.get('/users', (req, res) => {
     UserModel.find({})
     .then(users => res.json(users))
     .catch(err => res.json(err))
