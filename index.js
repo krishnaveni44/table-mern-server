@@ -37,13 +37,11 @@ mongoose
 //     }).catch(err => res.json(err))
 // })
 
-app.post('/', (req, res) => {
+app.post('/register', (req, res) => {
         RegisterModel.create(req.body)
         .then(register => res.json(register))
         .catch(err => res.json(err))
     })
-
-
 
 app.post('/login', (req, res) => {
     const {email, password} = req.body;
@@ -62,12 +60,26 @@ app.post('/login', (req, res) => {
     }).catch(err => res.json(err))
 })
 
-
-app.get('/users', (req, res) => {
-    UserModel.find({})
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
+app.get('/', (req, res) => {
+UserModel.find({})
+.then(users => res.json(users))
+.catch(err => res.json(err))
 })
+
+
+// app.get('/userss', async (req, res) => {
+  
+//    try{
+//     //await should come here
+//     const response = await UserModel.find({})
+//     return res.json(response)
+
+//     }
+//     catch(error){
+// console()
+//     }
+    
+// })
 
 app.get('/getUser/:id', (req, res) => {
    const id = req.params.id;
