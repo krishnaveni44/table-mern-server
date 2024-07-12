@@ -6,8 +6,16 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: String,
-  age: Number
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+    minlength: 1,
+  },
         
 });
 const UserModel = mongoose.model("users", UserSchema);
