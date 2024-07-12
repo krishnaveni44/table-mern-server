@@ -93,8 +93,8 @@ app.put('/updateUser/:id', (req, res) => {
      UserModel.findByIdAndUpdate({_id: id},
      {  name: req.body.name,
         title: req.body.title,
-        description: req.body.description,
-        image: req.body.image    })
+        description: req.body.description
+       })
      .then(users => res.json(users))
      .catch(err => res.json(err))
  })
