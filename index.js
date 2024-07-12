@@ -66,21 +66,6 @@ UserModel.find({})
 .catch(err => res.json(err))
 })
 
-
-// app.get('/userss', async (req, res) => {
-  
-//    try{
-//     //await should come here
-//     const response = await UserModel.find({})
-//     return res.json(response)
-
-//     }
-//     catch(error){
-// console()
-//     }
-    
-// })
-
 app.get('/getUser/:id', (req, res) => {
    const id = req.params.id;
     UserModel.findById({_id:id})
